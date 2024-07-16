@@ -16,3 +16,5 @@ class ProductPageLocators():
     
     PRODUCT_NAME_IN_FORM_LINK = (By.CSS_SELECTOR, ".product_main > h1")
     PRODUCT_PRISE_IN_FORM_LINK = (By.CSS_SELECTOR, ".product_main .price_color")
+
+    SUCCESS_MESSAGE_LINK = (By.CSS_SELECTOR, ".alert-success")
