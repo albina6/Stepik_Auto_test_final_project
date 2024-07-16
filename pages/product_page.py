@@ -24,3 +24,20 @@ class ProductPage(BasePage):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+        self.should_be_equal_name_in_cart_and_form()
+        self.should_be_equal_prise_in_cart_and_form()
+        
+
+    def should_be_equal_name_in_cart_and_form(self):
+        assert self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_CART_LINK).text == \
+                    self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_FORM_LINK).text, \
+                    "Name product in card not equal name in main form product"
+
+    def should_be_equal_prise_in_cart_and_form(self):
+        assert self.browser.find_element(*ProductPageLocators.PRODUCT_PRISE_IN_CART_LINK).text == \
+                    self.browser.find_element(*ProductPageLocators.PRODUCT_PRISE_IN_FORM_LINK).text, \
+                    "Name product in card not equal name in main form product"
+
+
+        
