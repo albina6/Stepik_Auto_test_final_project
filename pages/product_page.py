@@ -8,8 +8,14 @@ class ProductPage(BasePage):
     @staticmethod
     def calc_func(x):
         return math.log(abs(12*math.sin(x)))
+
+    def add_product_simple(self):
+        submit = self.browser.find_element(*ProductPageLocators.SUBMIT_LINK)
+        submit.click()
+        self.should_be_equal_name_in_cart_and_form()
+        self.should_be_equal_prise_in_cart_and_form()
     
-    def add_product(self):
+    def add_product_with_promo(self):
         submit = self.browser.find_element(*ProductPageLocators.SUBMIT_LINK)
         submit.click()
         alert = self.browser.switch_to.alert
@@ -17,7 +23,6 @@ class ProductPage(BasePage):
         answer = self.calc_func(int(x))
         alert.send_keys(str(answer))
         alert.accept()
-        # print(f"{int(x)} = {answer}")
         try:
             alert = self.browser.switch_to.alert
             alert_text = alert.text
