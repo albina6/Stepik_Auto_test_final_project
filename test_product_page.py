@@ -28,13 +28,22 @@ class TestGuestAddToBasketFromProductPage():
     
     # @pytest.mark.parametrize('link', link_list)
     @pytest.mark.xfail(reason="Red mark test")
-    def test_guest_can_add_product_to_basket_with_promo(self, browser):#, link):
+    def test_guest_can_add_product_to_basket_with_promo_is_disappeared_success_message(self, browser):#, link):
         link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
         page = ProductPage(browser, link)
         page.open()
         page.should_not_be_success_message()
         page.add_product_with_promo()
         page.shold_is_disappeared_success_message()
+
+    def test_guest_can_add_product_to_basket_with_promo(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+        # check show success_message in function add_product_with_promo
+        page.add_product_with_promo()
+    
 
     @pytest.mark.need_review
     def test_guest_can_add_product_to_basket_without_promo(self, browser):
