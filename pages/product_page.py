@@ -51,6 +51,6 @@ class ProductPage(BasePage):
 
     def shold_is_disappeared_success_message(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE_LINK), \
-           "Success message is presented, but should not be"
+           "Success message is presented, but should is disappeared"
     
         
