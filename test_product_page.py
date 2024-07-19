@@ -34,15 +34,18 @@ class TestGuestAddToBasketFromProductPage():
         page.open()
         page.should_not_be_success_message()
         page.add_product_with_promo()
-        page.shold_is_disappeared_success_message()
+        page.should_be_equal_name_in_cart_and_form()
+        page.should_be_equal_prise_in_cart_and_form()
+        page.should_is_disappeared_success_message()
 
     def test_guest_can_add_product_to_basket_with_promo(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
         page = ProductPage(browser, link)
         page.open()
         page.should_not_be_success_message()
-        # check show success_message in function add_product_with_promo
         page.add_product_with_promo()
+        page.should_be_equal_name_in_cart_and_form()
+        page.should_be_equal_prise_in_cart_and_form()
     
 
     @pytest.mark.need_review
@@ -51,8 +54,9 @@ class TestGuestAddToBasketFromProductPage():
         page = ProductPage(browser, link)
         page.open()
         page.should_not_be_success_message()
-        # with test succes message
-        page.add_product_simple()    
+        page.add_product_simple() 
+        page.should_be_equal_name_in_cart_and_form()
+        page.should_be_equal_prise_in_cart_and_form()
 
     @pytest.mark.xfail(reason="Red mark test")
     def test_guest_cant_see_success_message_after_adding_product_to_basket(self, browser):
@@ -69,9 +73,7 @@ class TestGuestAddToBasketFromProductPage():
         page.open()
         page.go_to_login_page()
         login_page = LoginPage(page.browser, page.browser.current_url)
-        login_page.should_be_login_page()
-        # time.sleep(3)
-    
+        login_page.should_be_login_page()    
     
     @pytest.mark.need_review
     def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
@@ -81,15 +83,22 @@ class TestGuestAddToBasketFromProductPage():
         page.open()
         page.go_to_cart_page()
         cart_page = CartPage(browser, browser.current_url)
+        cart_page.should_be_cart_page()
         cart_page.should_be_empty_cart_summary()
     
     def test_guest_can_see_add_product_in_basket_opened_from_product_page(self, browser):
+        ''' guesr can see product in basket. Without check
+            name_product_in_cart == name_product_in_form_product'''
+        
         link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/"
         page = ProductPage(browser, link)
         page.open()
         page.add_product_simple()
+        page.should_be_equal_name_in_cart_and_form()
+        page.should_be_equal_prise_in_cart_and_form()
         page.go_to_cart_page()
         cart_page = CartPage(browser, browser.current_url)
+        cart_page.should_be_cart_page()
         cart_page.should_be_product_in_cart()
     
     def test_guest_should_see_login_link_on_product_page(self, browser):
@@ -104,9 +113,10 @@ class TestGuestAddToBasketFromProductPage():
         page = ProductPage(browser, link)
         page.open()
         page.add_product_simple()
-        page.shold_is_disappeared_success_message()
+        page.should_be_equal_name_in_cart_and_form()
+        page.should_be_equal_prise_in_cart_and_form()
+        page.should_is_disappeared_success_message()
     
-###############################
 
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
@@ -132,7 +142,9 @@ class TestUserAddToBasketFromProductPage():
         page.open()
         page.should_not_be_success_message()
         page.add_product_with_promo()
-        page.shold_is_disappeared_success_message()
+        page.should_be_equal_name_in_cart_and_form()
+        page.should_be_equal_prise_in_cart_and_form()
+        page.should_is_disappeared_success_message()
 
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket_without_promo(self, browser):
@@ -142,6 +154,8 @@ class TestUserAddToBasketFromProductPage():
         page.should_not_be_success_message()
         # with test succes message
         page.add_product_simple() 
+        page.should_be_equal_name_in_cart_and_form()
+        page.should_be_equal_prise_in_cart_and_form()
         
     
     

@@ -3,6 +3,13 @@ from .locators import CartPageLocators
 
 
 class CartPage(BasePage):  
+    def should_be_cart_page(self):
+        self.should_be_basket_in_url()
+        # maybe in future add another tests
+    
+    def should_be_basket_in_url(self):
+        assert "basket" in self.browser.current_url, "current url do not have str 'basket'"
+        
     def should_be_empty_cart_summary(self):
         assert self.is_not_element_present(*CartPageLocators.PRODUCT_IN_CART_LINK), "Cart is not Empty"
 

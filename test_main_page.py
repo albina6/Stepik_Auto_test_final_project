@@ -28,6 +28,7 @@ class TestLoginFormMainPage():
     def test_guest_cant_see_product_in_basket_opened_from_main_page(self, browser):
         self.page.go_to_cart_page()
         cart_page = CartPage(browser, browser.current_url)
+        cart_page.should_be_cart_page()
         cart_page.should_be_empty_cart_summary()
 
     
