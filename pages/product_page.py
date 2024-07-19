@@ -12,8 +12,6 @@ class ProductPage(BasePage):
     def add_product_simple(self):
         submit = self.browser.find_element(*ProductPageLocators.SUBMIT_LINK)
         submit.click()
-        self.should_be_equal_name_in_cart_and_form()
-        self.should_be_equal_prise_in_cart_and_form()
     
     def add_product_with_promo(self):
         submit = self.browser.find_element(*ProductPageLocators.SUBMIT_LINK)
@@ -30,11 +28,7 @@ class ProductPage(BasePage):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
-
-        self.should_be_equal_name_in_cart_and_form()
-        self.should_be_equal_prise_in_cart_and_form()
-        
-
+    
     def should_be_equal_name_in_cart_and_form(self):
         assert self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_CART_LINK).text == \
                     self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_FORM_LINK).text, \
@@ -49,7 +43,7 @@ class ProductPage(BasePage):
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE_LINK), \
            "Success message is presented, but should not be"
 
-    def shold_is_disappeared_success_message(self):
+    def should_is_disappeared_success_message(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE_LINK), \
            "Success message is presented, but should is disappeared"
     
